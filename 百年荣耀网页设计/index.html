@@ -36,6 +36,17 @@
             text-align: center;
         }
     </style>
+    <script type="text/javascript">
+        var system ={};
+        var p = navigator.platform;
+        system.win = p.indexOf("Win") == 0;
+        system.mac = p.indexOf("Mac") == 0;
+        system.x11 = (p == "X11") || (p.indexOf("Linux") == 0);
+        if(!(system.win||system.mac||system.xll)){
+            var style=document.createElement('style');
+            style.innerHTML="#MainBody{width: 90%;}"
+        }
+</script>
 </head>
 <body>
     <center>
