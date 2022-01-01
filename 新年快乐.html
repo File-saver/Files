@@ -35,7 +35,7 @@
         var Texts='合乐融融 财运滚滚 一帆风顺 二龙腾飞 三羊开泰 四季平安 五福临门 六六大顺 七星高照 八方来财 九九同心 十全十美 岁岁平安 安居乐业 业和邦兴 兴旺发达 大吉大利 力争上游 游刃有余 双星报喜 三洋开泰 事事如意 八仙过海 长长久久'.split(' ')
         function Update() {
             var div=document.createElement("div");
-            div.style.fontSize=Math.round(22+Math.random()*10)+'px';
+            div.style.fontSize=Math.round(17+Math.random()*6)+'px';
             div.className='fadeIn';
             div.style.left=Math.round(Math.random()*window.screen.availWidth)+'px';
             div.style.top=Math.round(Math.random()*window.screen.availHeight)+'px';
@@ -43,7 +43,7 @@
             div.appendChild(document.createTextNode(Texts[Math.round(Math.random()*9)]));
             document.body.appendChild(div);
         }
-        window.setInterval(Update,100);
+        window.setInterval(Update,150);
     </script>
     <center><font style="font-size:40px;color:#e53;" face="幼圆"><b>新年快乐！</b></font></center>
     <footer style='position:fixed;bottom:0px;font-size:20px'>Made By 张浩然&emsp;2022/01/01</footer>
