@@ -42,10 +42,16 @@
             div.style.color='rgb('+Math.round(Math.random()*255)+','+Math.round(Math.random()*255)+','+Math.round(Math.random()*255)+')';
             div.appendChild(document.createTextNode(Texts[Math.round(Math.random()*9)]));
             document.body.appendChild(div);
+            music=document.getElementById("music");
+            if(music.paused){
+                music.paused=false;
+                music.play();
+            }
         }
         window.setInterval(Update,150);
     </script>
     <center><font style="font-size:40px;color:#e53;" face="幼圆"><b>元旦快乐</b></font></center>
+    <audio id="music" autoplay="true" controls="false" loop="true" preload="auto" hidden="true" src="我的天空.mp3"></audio>
     <footer style='position:fixed;bottom:0px;font-size:20px'>Made By 张浩然&emsp;2022/01/01</footer>
 </body>
 </html>
