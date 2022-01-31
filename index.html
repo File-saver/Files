@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>HAPPY NEW YEAR</title>
+        <link href="https://fonts.googleapis.com/css?family=Bebas+Neue&display=swap" rel="stylesheet">
+        <style>
+            html,body {
+                height: 100%;
+            }
+            body{
+                margin: 10px;
+                font-size: 2vw;
+                margin: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            } 
+            canvas {    
+                background-color: #000000;
+                max-width: 100%;
+                max-height: 100%;
+                width: auto;
+                height: auto;
+                resize: both;
+            }
+            center{
+                z-index: 100;
+                max-width: 100%;
+                max-height: 100%;
+                width: auto;
+                height: auto;
+            }
+            @font-face {
+                font-family: 'Bebas Neue';
+                font-style: normal;
+                font-weight: 400;
+                font-display: swap;
+                src: url(https://fonts.gstatic.com/s/bebasneue/v8/JTUSjIg69CK48gW7PXoo9Wdhyzbi.woff2) format('woff2');
+                unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+            }
+            @font-face {
+                font-family: 'Bebas Neue';
+                font-style: normal;
+                font-weight: 400;
+                font-display: swap;
+                src: url(https://fonts.gstatic.com/s/bebasneue/v8/JTUSjIg69CK48gW7PXoo9Wlhyw.woff2) format('woff2');
+                unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id='myCanvas' width='800px' height='1000px'></canvas>
+        <script type="text/javascript">
+        const max_fireworks=6,
+                max_sparks=50;
+            let canvas=document.getElementById('myCanvas');
+            let context=canvas.getContext('2d');
+            let fireworks=[];
+             
+            for (let i=0; i < max_fireworks; i++){
+                let firework={
+                    sparks:[]
+                };
+                for (let n=0; n < max_sparks; n++){
+                    let spark={
+                        vx: Math.random()*5+.5,
+                        vy: Math.random()*5+.5,
+                        weight: Math.random()*.3+.03,
+                        red: Math.floor(Math.random()*2),
+                        green: Math.floor(Math.random()*2),
+                        blue: Math.floor(Math.random()*2)
+                    };
+                    if (Math.random()>.5) spark.vx=-spark.vx;
+                    if (Math.random()>.5) spark.vy=-spark.vy;
+                    firework.sparks.push(spark);
+                }
+                fireworks.push(firework);
+                resetFirework(firework);
+            }
+            window.requestAnimationFrame(explode);
+            function resetFirework(firework){
+                firework.x=Math.floor(Math.random()*canvas.width);
+                firework.y=canvas.height;
+                firework.age=0;
+                firework.phase='fly';
+            }
+            function explode(){
+                context.clearRect(0,0,canvas.width,canvas.height);
+                fireworks.forEach((firework,index) => {
+                    if (firework.phase == 'explode') {
+                            firework.sparks.forEach((spark) => {
+                            for (let i=0; i < 10; i++) {
+                                let trailAge=firework.age+i;
+                                let x=firework.x+spark.vx*trailAge;
+                                let y=firework.y+spark.vy*trailAge+spark.weight*trailAge*spark.weight*trailAge;
+                                let fade=i*20-firework.age*2;
+                                let r=Math.floor(spark.red*fade);
+                                let g=Math.floor(spark.green*fade);
+                                let b=Math.floor(spark.blue*fade);
+                                context.beginPath();
+                                context.fillStyle='rgba('+r+','+g+','+b+',1)';
+                                context.rect(x,y,4,4);
+                                context.fill();
+                            }
+                        });
+                        firework.age++;
+                        if (firework.age>100 && Math.random()<.05) {
+                            resetFirework(firework);
+                        }
+                    } else {
+                        firework.y=firework.y-10;
+                        for (let spark=0; spark < 15; spark++) {
+                            context.beginPath();
+                            context.fillStyle='rgba('+index*50+','+spark*17+',0,1)';
+                            context.rect(firework.x+Math.random()*spark-spark/2,firework.y+spark*4,4,4);
+                            context.fill();
+                        }
+                        if (Math.random() < .001 || firework.y < 200) firework.phase='explode';
+                    }
+                });
+                context.font="120px Bebas Neue";
+                context.fillStyle="white";
+                context.textAlign="center";
+                context.fillText("新年快乐",canvas.width/2,canvas.height/3);
+                        context.font="100px Bebas Neue";
+                context.fillText("2022",canvas.width/2,canvas.height/2);
+                window.requestAnimationFrame(explode);
+            }
+        </script>
+    </body>
+</html>
