@@ -69,7 +69,7 @@
                 border: 0;
                 background-color: #0000;
                 position:fixed;
-                font-size:25px;
+                font-size:35px;
                 color: #ffffff;
             }
         </style>
@@ -162,8 +162,8 @@
             var div=document.createElement("div");
             div.style.fontSize=Math.round(17+Math.random()*6)+'px';
             div.className='fadeIn';
-            div.style.left=Math.round(Math.random()*window.screen.availWidth)-12+'px';
-            div.style.top=Math.round(Math.random()*window.screen.availHeight)-12+'px';
+            div.style.left=Math.round(Math.random()*window.screen.availWidth*3)-12+'px';
+            div.style.top=Math.round(Math.random()*window.screen.availHeight*3)-12+'px';
             div.style.color='rgb('+Math.round(Math.random()*255)+','+Math.round(Math.random()*255)+','+Math.round(Math.random()*255)+')';
             div.appendChild(document.createTextNode(Texts[Math.round(Math.random()*27)]));
             document.body.appendChild(div);
