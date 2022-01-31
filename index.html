@@ -48,12 +48,36 @@
                 src: url(https://fonts.gstatic.com/s/bebasneue/v8/JTUSjIg69CK48gW7PXoo9Wlhyw.woff2) format('woff2');
                 unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
             }
+            @-webkit-keyframes fadeIn {
+                0%{opacity:0;}
+                50% {opacity:1;}
+                100%{opacity:0;}
+            }
+            .fadeIn{
+                font-family:幼圆;
+                word-break:keep-all;
+                white-space:nowrap;
+                overflow:hidden;
+                position:absolute;
+                -webkit-animation-name:fadeIn;
+                -webkit-animation-duration:4s;
+                -webkit-animation-iteration-count:1;
+                -webkit-animation-delay:0s;
+                opacity:0;
+            }
+            footer,button{
+                border: 0;
+                background-color: #0000;
+                position:fixed;
+                font-size:25px;
+                color: #ffffff;
+            }
         </style>
     </head>
     <body>
         <canvas id='myCanvas' width='800px' height='1000px'></canvas>
         <script type="text/javascript">
-        const max_fireworks=6,
+        const max_fireworks=5,
                 max_sparks=50;
             let canvas=document.getElementById('myCanvas');
             let context=canvas.getContext('2d');
@@ -120,14 +144,40 @@
                         if (Math.random() < .001 || firework.y < 200) firework.phase='explode';
                     }
                 });
-                context.font="120px Bebas Neue";
                 context.fillStyle="white";
                 context.textAlign="center";
-                context.fillText("新年快乐",canvas.width/2,canvas.height/3);
-                        context.font="100px Bebas Neue";
-                context.fillText("2022",canvas.width/2,canvas.height/2);
+                context.font="70px Bebas Neue";
+                context.fillText("张浩然祝老师",canvas.width/2,canvas.height/4.8);
+                context.font="120px Bebas Neue";
+                context.fillText("新年快乐",canvas.width/2,canvas.height/2.4);
+                context.font="100px Bebas Neue";
+                context.fillText("2022",canvas.width/2,canvas.height/1.7);
                 window.requestAnimationFrame(explode);
             }
         </script>
+        <script type="text/javascript">
+        document.documentElement.style.overflow = 'hidden'
+        var Texts='虎年大吉 虎虎生威 如虎添翼 不亦乐虎 合乐融融 财运滚滚 一帆风顺 二龙腾飞 三羊开泰 四季平安 五福临门 六六大顺 七星高照 八方来财 九九同心 十全十美 岁岁平安 安居乐业 业和邦兴 兴旺发达 大吉大利 力争上游 游刃有余 双星报喜 三洋开泰 事事如意 八仙过海 长长久久'.split(' ')
+        function Update() {
+            var div=document.createElement("div");
+            div.style.fontSize=Math.round(17+Math.random()*6)+'px';
+            div.className='fadeIn';
+            div.style.left=Math.round(Math.random()*window.screen.availWidth)-12+'px';
+            div.style.top=Math.round(Math.random()*window.screen.availHeight)-12+'px';
+            div.style.color='rgb('+Math.round(Math.random()*255)+','+Math.round(Math.random()*255)+','+Math.round(Math.random()*255)+')';
+            div.appendChild(document.createTextNode(Texts[Math.round(Math.random()*27)]));
+            document.body.appendChild(div);
+        }
+        function Click(){
+            music=document.getElementById("music");
+            if(music.paused){
+                music.paused=false;
+                music.play();
+            }
+        }
+        window.setInterval(Update,150);
+    </script>
+    <audio id="music" autoplay="true" controls="true" loop="true" preload="auto" hidden="true" src="Origin.mp3"></audio>
+    <button onclick='Click()' style='bottom:100px;'>播放音乐</button><footer style='bottom:20px;'>Made By 张浩然&emsp;2022/01/31</footer>
     </body>
 </html>
